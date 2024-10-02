@@ -6,6 +6,7 @@ This repository includes the solutions to the exercices of the course "Algoritmi
 
 - [Project Structure](#project-structure)
 - [Running the Project](#running-the-project)
+- [Using different input](#using-different-input)
 
 
 ## Project Structure
@@ -19,3 +20,6 @@ From the root directory run the command:
 ```go
   go run Module_<XX>/<exercise>/<fileName>.go
 ```
+
+## Using different input
+The input is hardcoded in the file. To change the input, modify the `sequence` variable in the file of a certain exercise.
