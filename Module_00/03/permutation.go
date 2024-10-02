@@ -22,7 +22,7 @@ type person struct {
 }
 
 func main() {
-	var providedVector = []person{
+	var sequence = []person{
 		{key: 6, name: "Francesco"},
 		{key: 1, name: "Andrea"},
 		{key: 5, name: "Elisa"},
@@ -34,10 +34,10 @@ func main() {
 		{key: 8, name: "Henry"},
 	}
 	
-	var sortedVector = make([]person, len(providedVector))
+	var sortedVector = make([]person, len(sequence))
 
-	for i := len(providedVector) - 1; i >= 0; i-- {
-		var currentPerson = providedVector[i]
+	for i := len(sequence) - 1; i >= 0; i-- {
+		var currentPerson = sequence[i]
 		sortedVector[currentPerson.key - 1] = currentPerson
 	}
 	reverse(sortedVector)

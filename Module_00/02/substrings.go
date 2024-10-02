@@ -10,15 +10,15 @@ import "fmt"
 
 func main() {
 	// declare a string only made with the characters a, b, c
-	s := "ccbaacbabbcbab"
+	sequence := "ccbaacbabbcbab"
 	// declare a counter
 	countA := 0
 	countSubstrings := 0
-	for i := 0; i < len(s); i++ {
-		if s[i] == 'a' {
+	for i := 0; i < len(sequence); i++ {
+		if sequence[i] == 'a' {
 			countA++
 		}
-		if s[i] == 'b' {
+		if sequence[i] == 'b' {
 			countSubstrings += countA
 		}
 	}

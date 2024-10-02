@@ -12,20 +12,20 @@ package main
 import "fmt"
 
 func main() {
-	var permutation = []int{7, 4, 5, 1, 3, 6, 2}
+	var sequence = []int{7, 4, 5, 1, 3, 6, 2}
 	var counter = 0
 	var current = 0
-	for j := 0; current < len(permutation); j++ {
+	for j := 0; current < len(sequence); j++ {
 		counter++
 		if(j%2 == 0) {
-			for i := 0; i < len(permutation); i++ {
-				if(permutation[i] == current + 1) {
+			for i := 0; i < len(sequence); i++ {
+				if(sequence[i] == current + 1) {
 					current++
 				}
 			}
 		} else {
-			for i := len(permutation) - 1; i >= 0; i-- {
-				if(permutation[i] == current + 1) {
+			for i := len(sequence) - 1; i >= 0; i-- {
+				if(sequence[i] == current + 1) {
 					current++
 				}
 			}
