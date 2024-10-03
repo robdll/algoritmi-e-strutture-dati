@@ -12,7 +12,7 @@ This repository includes the solutions to the exercices of the course "Algoritmi
 ## Project Structure
 
 The project is structured as follows:
-Each folder at the top level is named as Module_X where `X` identify module number E.G. M01, M02, etc.
+Each folder at the top level is named as Lesson_X where `X` identify the lesson number E.G. Lesson_01, Lesson_02, etc.
 Under each module folder there will be a _.pdf_ file containing the exercises and one subfolder for each exercise named with its number E.G. 01, 02, etc.
 
 ## Running the Project
