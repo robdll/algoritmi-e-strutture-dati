@@ -35,13 +35,18 @@ func main() {
 	}
 	
 	var sortedVector = make([]person, len(sequence))
-
 	for i := len(sequence) - 1; i >= 0; i-- {
 		var currentPerson = sequence[i]
 		sortedVector[currentPerson.key - 1] = currentPerson
 	}
-	reverse(sortedVector)
-	fmt.Println(sortedVector)
+
+	var reversedVector = make([]person, len(sequence))
+	for j, i := 0, len(sequence); i > 0 ; i-- {
+		var currentPerson = sortedVector[i - 1]
+		reversedVector[j] = currentPerson
+		j++
+	}
+	fmt.Println("reversed Vector: ", reversedVector)
 }
 
 func reverse(slice []person) {
