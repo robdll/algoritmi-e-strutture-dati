@@ -16,9 +16,21 @@ import (
 
 func main() {
 	fmt.Println("1. Count letter")
-	// countLetter()
 	fmt.Println("2. Count letters")
-	countLetters()
+	fmt.Println("3. Is Anagram")
+	var choice int
+	fmt.Print("Choose an option: ")
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		countLetter()
+	case 2:
+		countLetters()
+	case 3:
+		isAnagram()
+	default:
+		fmt.Println("Invalid choice")
+	}
 }
 
 func countLetter() {
@@ -73,10 +85,20 @@ func isAnagram() {
 		fmt.Println("The two words are not anagrams")
 		return
 	}
+	removedChars := 0
 	for _, c := range first {
 		index := strings.IndexRune(second, c)
-		if index == -1 {
+		if index != -1 {
+			second = second[:index] + second[index+1:]
+			removedChars++
+		} else {
+			removedChars = -1
+			break
 		}
 	}
-	fmt.Println("The two words are anagrams")
+	if(removedChars != -1 && removedChars == len(first)) {
+		fmt.Println("The two words are anagrams")
+	} else {
+		fmt.Println("The two words are not anagrams")
+	}
 }
