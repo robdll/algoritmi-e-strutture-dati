@@ -14,8 +14,6 @@
 
 package main
 
-import "fmt"
-
 type person struct {
 	name string
 	key int
@@ -33,28 +31,14 @@ func main() {
 		{key: 9, name: "Irene"},
 		{key: 8, name: "Henry"},
 	}
-	
-	var sortedVector = make([]person, len(sequence))
+
 	for i := len(sequence) - 1; i >= 0; i-- {
-		var currentPerson = sequence[i]
-		sortedVector[currentPerson.key - 1] = currentPerson
+		var key = sequence[i].key
+		sequence[i], sequence[len(sequence)-key] = sequence[len(sequence)-key], sequence[i]
 	}
 
-	var reversedVector = make([]person, len(sequence))
-	for j, i := 0, len(sequence); i > 0 ; i-- {
-		var currentPerson = sortedVector[i - 1]
-		reversedVector[j] = currentPerson
-		j++
+	for _, p := range sequence {
+		println(p.name, p.key)
 	}
-	fmt.Println("reversed Vector: ", reversedVector)
-}
 
-func reverse(slice []person) {
-	var leftIndex = 0
-	var rightIndex = len(slice) - 1
-	for leftIndex < rightIndex {
-		slice[leftIndex], slice[rightIndex] = slice[rightIndex], slice[leftIndex]
-		leftIndex++
-		rightIndex--
-	}
 }
