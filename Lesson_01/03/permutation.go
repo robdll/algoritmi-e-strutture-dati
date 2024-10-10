@@ -33,12 +33,12 @@ func main() {
 }
 
 	var requiredSwap = len(sequence) -1
-	for numSwap, pos := 0, 0; numSwap != requiredSwap; {
-		if sequence[pos].key != len(sequence) - pos {
-			sequence[pos], sequence[len(sequence)-sequence[pos].key] = sequence[len(sequence)-sequence[pos].key], sequence[pos]
+	for numSwap, unorderedLeftIndex := 0, 0; numSwap != requiredSwap; {
+		if sequence[unorderedLeftIndex].key != len(sequence) - unorderedLeftIndex {
+			sequence[unorderedLeftIndex], sequence[len(sequence)-sequence[unorderedLeftIndex].key] = sequence[len(sequence)-sequence[unorderedLeftIndex].key], sequence[unorderedLeftIndex]
 			numSwap++
 		} else {
-			pos++
+			unorderedLeftIndex++
 			requiredSwap--
 		}
 	}
