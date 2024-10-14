@@ -1,4 +1,4 @@
-// implement insertion sort
+// implement selection sort
 
 package main
 
@@ -7,26 +7,21 @@ import "fmt"
 func main() {
 	s := []int{5, 2, 4, 6, 1, 3}
 	fmt.Println("Before: ", s)
-	insertSort(s)
+	selectionSort(s)
 	fmt.Println("After: ", s)
 }
 
-func insertSort(slice []int) {
+func selectionSort(slice []int) {
 	// iterate n-1 times
- 	for currentIdx:=1; currentIdx<len(slice); currentIdx++ {
-		// store current element
-		currentElement := slice[currentIdx]
-		fmt.Println("Iteration #", currentIdx, "currentElement: ", currentElement)
-		// iterate on each element on the left (of our current element) until they are bigger than the current one
-		j := currentIdx-1
-		for j>=0 && slice[j]>currentElement {
-			fmt.Println("Element ", slice[j], "is moved to the right")
-			// move the element to the right
-			slice[j+1] = slice[j]
-			j--
+	for idx := 0; idx < len(slice)-1; idx++ {
+		minIdx := idx
+		// find the minimum element in the remaining unsorted slice
+		for j := idx + 1; j < len(slice); j++ {
+			if slice[j] < slice[minIdx] {
+				minIdx = j
+			}
 		}
-		// insert the current element in the right position
-		fmt.Println(currentElement, "goes to position", j+1 )
-		slice[j+1] = currentElement
- 	}
+		// move minimum element to the index of the unsorted slice
+		slice[idx], slice[minIdx] = slice[minIdx], slice[idx]
+	}
 }
