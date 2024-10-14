@@ -21,20 +21,26 @@ type person struct {
 
 func main() {
 	var sequence = []person{
-		{key: 6, name: "Francesco"},
 		{key: 1, name: "Andrea"},
-		{key: 5, name: "Elisa"},
 		{key: 2, name: "Beatrice"},
-		{key: 3, name: "Carlo"},
-		{key: 4, name: "Dino"},
-		{key: 7, name: "Giorgia"},
-		{key: 9, name: "Irene"},
+		{key: 6, name: "Francesco"},
+		{key: 5, name: "Elisa"},
 		{key: 8, name: "Henry"},
-	}
+		{key: 9, name: "Irene"},
+		{key: 4, name: "Dino"},
+		{key: 3, name: "Carlo"},
+		{key: 7, name: "Giorgia"},
+}
 
-	for i := len(sequence) - 1; i >= 0; i-- {
-		var key = sequence[i].key
-		sequence[i], sequence[len(sequence)-key] = sequence[len(sequence)-key], sequence[i]
+	var requiredSwap = len(sequence) -1
+	for numSwap, unorderedLeftIndex := 0, 0; numSwap != requiredSwap; {
+		if sequence[unorderedLeftIndex].key != len(sequence) - unorderedLeftIndex {
+			sequence[unorderedLeftIndex], sequence[len(sequence)-sequence[unorderedLeftIndex].key] = sequence[len(sequence)-sequence[unorderedLeftIndex].key], sequence[unorderedLeftIndex]
+			numSwap++
+		} else {
+			unorderedLeftIndex++
+			requiredSwap--
+		}
 	}
 
 	for _, p := range sequence {

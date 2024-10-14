@@ -13,22 +13,12 @@ import "fmt"
 
 func main() {
 	var sequence = []int{7, 4, 5, 1, 3, 6, 2}
-	var counter = 0
-	var current = 0
-	for j := 0; current < len(sequence); j++ {
-		counter++
-		if(j%2 == 0) {
-			for i := 0; i < len(sequence); i++ {
-				if(sequence[i] == current + 1) {
-					current++
-				}
-			}
-		} else {
-			for i := len(sequence) - 1; i >= 0; i-- {
-				if(sequence[i] == current + 1) {
-					current++
-				}
-			}
+	readValues := make(map[int]bool)
+	counter := 0
+	for _, value := range sequence {
+		readValues[value] = true
+		if(readValues[value+1]) {
+			counter++
 		}
 	}
 	fmt.Println(counter)
