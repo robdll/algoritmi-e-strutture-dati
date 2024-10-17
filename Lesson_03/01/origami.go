@@ -51,7 +51,6 @@ func main() {
 			foldString := strings.Split(instructions[i], " ")[2]
 			foldingSequence = append(foldingSequence, foldString)
 		}
-		// Improvement 1: we could create a map to keep track of all the # position (e.g. { 5: [1, 3, 5] })
 	}
 
 	// create paper
@@ -60,8 +59,7 @@ func main() {
 		paper[i] = make([]string, maxColumn+1)
 	}
 
-	// draw #
-		// Improvement 1 (use the map here
+	// draw # symbols
 	for i:=0; instructions[i] != ""; i++ {
 		coords := strings.Split(instructions[i], ",")
 		x, _ := strconv.Atoi(coords[0])
@@ -69,8 +67,7 @@ func main() {
 		paper[y][x] = "#"
 	}
 
-	// draw a . where there is no #
-	// Improvement 2 skip the previous loop and just either draw a . or a # in the next loop with the map
+	// draw a . symbols
 	for i:=0; i<=maxRow; i++ {
 		for j:=0; j<=maxColumn; j++ {
 			if paper[i][j] == "" {
@@ -79,8 +76,6 @@ func main() {
 		}
 	}
 
-	// get folding instructions
-	// foldingInstruction = instructions[len(instructions)-1]
 
 	// print the map
 	for i:=0; i<=maxRow; i++ {
@@ -90,4 +85,5 @@ func main() {
 	}
 	fmt.Println(foldingSequence)
 
+	
 }
