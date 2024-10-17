@@ -32,23 +32,23 @@ func main() {
 	}
 
 	// calc paper size
-	maxX, maxY := 0, 0
+	maxColumn, maxRow := 0, 0
 	emptyLine := 0
 	for i:=0; instructions[i] != ""; i++ {
 		coords := strings.Split(instructions[i], ",")
-		x, _ := strconv.Atoi(coords[0])
-		y, _ := strconv.Atoi(coords[1])
-		maxX = max(maxX, x)
-		maxY = max(maxY, y)
+		a, _ := strconv.Atoi(coords[0])
+		b, _ := strconv.Atoi(coords[1])
+		maxColumn = max(maxColumn, a)
+		maxRow = max(maxRow, b)
 		emptyLine++
 		// Improvement 1: we could create a map to keep track of all the # position (e.g. { 5: [1, 3, 5] })
 	}
 	emptyLine++
 
 	// create paper
-	paper := make([][]string, maxY+1)
-	for i:=0; i<=maxY; i++ {
-		paper[i] = make([]string, maxX+1)
+	paper := make([][]string, maxRow+1)
+	for i:=0; i<=maxRow; i++ {
+		paper[i] = make([]string, maxColumn+1)
 	}
 
 	// draw #
@@ -62,8 +62,8 @@ func main() {
 
 	// draw a . where there is no #
 	// Improvement 2 skip the previous loop and just either draw a . or a # in the next loop with the map
-	for i:=0; i<=maxY; i++ {
-		for j:=0; j<=maxX; j++ {
+	for i:=0; i<=maxRow; i++ {
+		for j:=0; j<=maxColumn; j++ {
 			if paper[i][j] == "" {
 				paper[i][j] = "."
 			}
@@ -74,11 +74,9 @@ func main() {
 	// foldingInstruction = instructions[len(instructions)-1]
 
 	// print the map
-	for i:=0; i<=maxY; i++ {
+	for i:=0; i<=maxRow; i++ {
 		fmt.Println(strings.Join(paper[i], ""))
 	}
-
-
 
 
 }
