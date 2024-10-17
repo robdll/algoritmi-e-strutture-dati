@@ -92,13 +92,13 @@ func main() {
 			yFoldingPoint = (maxRow-1)/2
 			fmt.Println("E' un taglio orizzontale, quindi lavoriamo su tutte le colonne e su #righe:",yFoldingPoint)
 		}
-		// for i=0; i<xFoldingPoint; i++ {
-		// 	if !isVerticalFold {
-		// 		fmt.Println("E' verticale, quindi lavoriamo fino alla riga",yFoldingPoint)
-		// 	}	else {
-		// 		fmt.Println("tutte le colonne verranno usate")
-		// 	}
-		// }
+		fmt.Println("foldX",xFoldingPoint,"foldY", yFoldingPoint)
+		for j:=0; j<xFoldingPoint; j++ {
+			fmt.Println("riga", j)
+			for k:=0; k<xFoldingPoint; k++ {
+				fmt.Println("colonna", k)
+			}
+		}
 	}
 
 
