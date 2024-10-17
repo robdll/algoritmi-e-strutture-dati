@@ -76,34 +76,52 @@ func main() {
 		}
 	}
 
+	for i:=0; i<=maxRow; i++ {
+		fmt.Println(strings.Join(paper[i], ""))
+	}
+	fmt.Println(foldingSequence)
+
 	// per ogni istruzione di piegatura
 	for i:=0; i<len(foldingSequence); i++ {
 		// per ogni riga della carta o riga/2 se pieghi lungo y
 		// check first char of foldingSequence to see if it's x or y
 
-		isVerticalFold := strings.Split(foldingSequence[i], "=")[0] == "y"
-		xFoldingPoint := maxColumn
-		yFoldingPoint := maxRow
-		if isVerticalFold {
-			// this is the same value we could get from the folding instruction
-			// strings.Split(foldingSequence[i], "=")[0] which should be converted to number
-			yFoldingPoint = (maxRow/2)-1
+		isVerticalLine := strings.Split(foldingSequence[i], "=")[0] == "x"
+		foldingRow := len(paper)
+		foldingColumn := len(paper[0])
+		if isVerticalLine {
+			xLine, _ := strconv.Atoi(strings.Split(foldingSequence[i], "=")[1])
+			foldingColumn = xLine
 		} else {
-			xFoldingPoint = (maxColumn/2)-1
+			yLine, _ := strconv.Atoi(strings.Split(foldingSequence[i], "=")[1])
+			foldingRow = yLine
 		}
-		for j:=0; j<=yFoldingPoint; j++ {
-			for k:=0; k<=xFoldingPoint; k++ {
+		for j:=0; j<foldingRow; j++ {
+			for k:=0; k<foldingColumn; k++ {
 				var overlapValue string 
-				if isVerticalFold {
-					overlapValue = paper[maxRow-(j)][k]
-				} else {
+				if isVerticalLine {
+					// fmt.Println("foldingColumn", foldingColumn)
 					overlapValue = paper[j][maxColumn-k]
+				} else {
+					overlapValue = paper[maxRow-j][k]
 				}
 				if overlapValue == "#" {
 					paper[j][k] = "#"
 				}
 			}
+			// scarto tutte le colonne non necessarie qui
+			// if(isVerticalLine) {
+			//  	fmt.Println("xFoldingPoint", xFoldingPoint)
+			//  	paper[j] = paper[j][0:xFoldingPoint+1]
+			//  	maxColumn = len(paper[j]) -1
+			// }
 		}
+		// scarto tutte le righe non necessarie qui
+		// if(!isVerticalLine) {
+		// 	fmt.Println("yFoldingPoint", xFoldingPoint)
+		// 	paper = paper[0:yFoldingPoint]
+		// 	maxRow = len(paper) -1
+		// }
 	}
 
 
@@ -113,7 +131,6 @@ func main() {
 		// riga lunghezza meno i
 		// fmt.Println(strings.Join(paper[maxRow-i], ""))
 	}
-	fmt.Println(foldingSequence)
 
 	
 }
