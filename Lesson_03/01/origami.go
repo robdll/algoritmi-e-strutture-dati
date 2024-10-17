@@ -110,18 +110,18 @@ func main() {
 				}
 			}
 			// scarto tutte le colonne non necessarie qui
-			// if(isVerticalLine) {
-			//  	fmt.Println("xFoldingPoint", xFoldingPoint)
-			//  	paper[j] = paper[j][0:xFoldingPoint+1]
-			//  	maxColumn = len(paper[j]) -1
-			// }
+			
 		}
 		// scarto tutte le righe non necessarie qui
-		// if(!isVerticalLine) {
-		// 	fmt.Println("yFoldingPoint", xFoldingPoint)
-		// 	paper = paper[0:yFoldingPoint]
-		// 	maxRow = len(paper) -1
-		// }
+		if(!isVerticalLine) {
+			paper = paper[0:foldingRow]
+			maxRow = len(paper) -1
+		} else {
+			for j:=0; j<=maxRow; j++ {
+				paper[j] = paper[j][0:foldingColumn]
+			}
+			maxColumn = len(paper[0]) -1
+		}
 	}
 
 
