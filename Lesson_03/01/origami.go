@@ -33,17 +33,26 @@ func main() {
 
 	// calc paper size
 	maxColumn, maxRow := 0, 0
-	emptyLine := 0
-	for i:=0; instructions[i] != ""; i++ {
-		coords := strings.Split(instructions[i], ",")
-		a, _ := strconv.Atoi(coords[0])
-		b, _ := strconv.Atoi(coords[1])
-		maxColumn = max(maxColumn, a)
-		maxRow = max(maxRow, b)
-		emptyLine++
+	coordsSection  := true
+	foldingSequence := make([]string, 0)
+
+	for i:=0; i < len(instructions); i++ {
+		if (instructions[i] == "") {
+			coordsSection = false
+			continue
+		}
+		if(coordsSection) {
+			coords := strings.Split(instructions[i], ",")
+			a, _ := strconv.Atoi(coords[0])
+			b, _ := strconv.Atoi(coords[1])
+			maxColumn = max(maxColumn, a)
+			maxRow = max(maxRow, b)
+		} else {
+			foldString := strings.Split(instructions[i], " ")[2]
+			foldingSequence = append(foldingSequence, foldString)
+		}
 		// Improvement 1: we could create a map to keep track of all the # position (e.g. { 5: [1, 3, 5] })
 	}
-	emptyLine++
 
 	// create paper
 	paper := make([][]string, maxRow+1)
@@ -76,7 +85,9 @@ func main() {
 	// print the map
 	for i:=0; i<=maxRow; i++ {
 		fmt.Println(strings.Join(paper[i], ""))
+		// riga lunghezza meno i
+		// fmt.Println(strings.Join(paper[maxRow-i], ""))
 	}
-
+	fmt.Println(foldingSequence)
 
 }
