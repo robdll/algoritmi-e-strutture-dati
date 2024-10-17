@@ -92,21 +92,18 @@ func main() {
 			xFoldingPoint = (maxColumn/2)-1
 		}
 		for j:=0; j<=yFoldingPoint; j++ {
-			fmt.Println("riga ", j)
 			for k:=0; k<=xFoldingPoint; k++ {
-				fmt.Println("colonna ", k)
 				var overlapValue string 
 				if isVerticalFold {
-					// overlapValue = paper[maxRow-(j+1)][k]
+					overlapValue = paper[maxRow-(j)][k]
 				} else {
-					// overlapValue = paper[j][maxColumn-(k+1)]
+					overlapValue = paper[j][maxColumn-k]
 				}
 				if overlapValue == "#" {
 					paper[j][k] = "#"
 				}
 			}
 		}
-		
 	}
 
 
