@@ -76,6 +76,31 @@ func main() {
 		}
 	}
 
+	// per ogni istruzione di piegatura
+	for i:=0; i<len(foldingSequence); i++ {
+		// per ogni riga della carta o riga/2 se pieghi lungo y
+		// check first char of foldingSequence to see if it's x or y
+
+		isVerticalFold := strings.Split(foldingSequence[i], "=")[0] == "y"
+		fmt.Println("Piegatura",isVerticalFold, foldingSequence[i])
+		xFoldingPoint := maxColumn
+		yFoldingPoint := maxRow
+		if isVerticalFold {
+			xFoldingPoint = (maxColumn-1)/2
+			fmt.Println("E' un taglio verticale, quindi lavoriamo su tutte le righe e su #colonne:",xFoldingPoint)
+		} else {
+			yFoldingPoint = (maxRow-1)/2
+			fmt.Println("E' un taglio orizzontale, quindi lavoriamo su tutte le colonne e su #righe:",yFoldingPoint)
+		}
+		// for i=0; i<xFoldingPoint; i++ {
+		// 	if !isVerticalFold {
+		// 		fmt.Println("E' verticale, quindi lavoriamo fino alla riga",yFoldingPoint)
+		// 	}	else {
+		// 		fmt.Println("tutte le colonne verranno usate")
+		// 	}
+		// }
+	}
+
 
 	// print the map
 	for i:=0; i<=maxRow; i++ {
@@ -87,3 +112,7 @@ func main() {
 
 	
 }
+
+// avrei fatto un ciclo for iniziale per vedere se vuole che tagli alla y o x fino a che boh prema un tasto che vuole per uscire dalla piegatura, poi if che appunto
+// mi dice se ha scelto un x o y, e dentro ognuno facevi un for per appunto fare il fold facendo poi vedere allutente la piegatura corrente e poi di nuovo la domanda
+// almeno cosi fai il ciclo for per y o per x
