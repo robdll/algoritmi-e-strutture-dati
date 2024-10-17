@@ -82,23 +82,31 @@ func main() {
 		// check first char of foldingSequence to see if it's x or y
 
 		isVerticalFold := strings.Split(foldingSequence[i], "=")[0] == "y"
-		fmt.Println("Piegatura",isVerticalFold, foldingSequence[i])
 		xFoldingPoint := maxColumn
 		yFoldingPoint := maxRow
 		if isVerticalFold {
-			xFoldingPoint = (maxColumn-1)/2
-			fmt.Println("E' un taglio verticale, quindi lavoriamo su tutte le righe e su #colonne:",xFoldingPoint)
+			// this is the same value we could get from the folding instruction
+			// strings.Split(foldingSequence[i], "=")[0] which should be converted to number
+			yFoldingPoint = (maxRow/2)-1
 		} else {
-			yFoldingPoint = (maxRow-1)/2
-			fmt.Println("E' un taglio orizzontale, quindi lavoriamo su tutte le colonne e su #righe:",yFoldingPoint)
+			xFoldingPoint = (maxColumn/2)-1
 		}
-		fmt.Println("foldX",xFoldingPoint,"foldY", yFoldingPoint)
-		for j:=0; j<xFoldingPoint; j++ {
-			fmt.Println("riga", j)
-			for k:=0; k<xFoldingPoint; k++ {
-				fmt.Println("colonna", k)
+		for j:=0; j<=yFoldingPoint; j++ {
+			fmt.Println("riga ", j)
+			for k:=0; k<=xFoldingPoint; k++ {
+				fmt.Println("colonna ", k)
+				var overlapValue string 
+				if isVerticalFold {
+					// overlapValue = paper[maxRow-(j+1)][k]
+				} else {
+					// overlapValue = paper[j][maxColumn-(k+1)]
+				}
+				if overlapValue == "#" {
+					paper[j][k] = "#"
+				}
 			}
 		}
+		
 	}
 
 
