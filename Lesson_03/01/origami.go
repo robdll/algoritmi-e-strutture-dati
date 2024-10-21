@@ -22,6 +22,7 @@ func main() {
 
 	var instructions []Instruction
 	var coordinates []Coord
+	coordinateMap := make(map[string]bool)
 
 	file, err := os.Open("./Lesson_03/01/input_small.txt")
 	if err != nil {
@@ -29,6 +30,8 @@ func main() {
 		return
 	}
 	scanner := bufio.NewScanner(file)
+
+	maxColumn, maxRow := 0, 0
 
 	for scanner.Scan()  {
 		line := scanner.Text()
@@ -43,70 +46,42 @@ func main() {
 			index, _ := strconv.Atoi(parts[1])
 			instructions = append(instructions, Instruction{letter, index})
 		} else {
-			fmt.Println("line", line)
 			parts := strings.Split(line, ",")
-			riga, _ := strconv.Atoi(parts[0])
-			colonna, _ := strconv.Atoi(parts[1])
+			colonna, _ := strconv.Atoi(strings.TrimSpace(parts[0]))
+			riga, _ := strconv.Atoi(parts[1])
 			coordinates = append(coordinates, Coord{riga, colonna})
+			// Create the key as "riga-colonna"
+			key := fmt.Sprintf("%d-%d", riga, colonna)
+			coordinateMap[key] = true
+			if(riga > maxRow) {
+				maxRow = riga
+			}
+			if(colonna > maxColumn) {
+				maxColumn = colonna
+			}
 		}
 	}
 
-	fmt.Println("instructions", instructions)
-	fmt.Println("coordinates", coordinates)
+	// fmt.Println("instructions", instructions)
+	// fmt.Println("coordinates", coordinates)
 
+	// create paper and draw coordinates
+	paper := make([][]string, maxRow+1)
+	for i:=0; i<=maxRow; i++ {
+		paper[i] = make([]string, maxColumn+1)
+		for j:=0; j<=maxColumn; j++ {
+			key := fmt.Sprintf("%d-%d", i, j)
+			if coordinateMap[key] {
+				paper[i][j] = "#"
+			} else {
+				paper[i][j] = "."
+			}
+		}
+	}
 
-	// calc paper size
-	// maxColumn, maxRow := 0, 0
-	// coordsSection  := true
-	// foldingSequence := make([]string, 0)
-
-	// // for _, line := range lines {
-	// for i:=0; i < len(instructions); i++ {
-	// 	// if first char is a letter
-
-	// 	firstChar := instructions[i][0]
-	// 	if firstChar == 'f'{
-	// 		coordsSection = false
-	// 	}
-	// 	if(coordsSection) {
-	// 		coords := strings.Split(instructions[i], ",")
-	// 		a, _ := strconv.Atoi(coords[0])
-	// 		b, _ := strconv.Atoi(coords[1])
-	// 		maxColumn = max(maxColumn, a)
-	// 		maxRow = max(maxRow, b)
-	// 	} else {
-	// 		foldString := strings.Split(instructions[i], " ")[2]
-	// 		foldingSequence = append(foldingSequence, foldString)
-	// 	}
-	// }
-
-	// // create paper
-	// paper := make([][]string, maxRow+1)
-	// for i:=0; i<=maxRow; i++ {
-	// 	paper[i] = make([]string, maxColumn+1)
-	// }
-
-	// // draw # symbols
-	// for i:=0; instructions[i] != ""; i++ {
-	// 	coords := strings.Split(instructions[i], ",")
-	// 	x, _ := strconv.Atoi(coords[0])
-	// 	y, _ := strconv.Atoi(coords[1])
-	// 	paper[y][x] = "#"
-	// }
-
-	// // draw a . symbols
-	// for i:=0; i<=maxRow; i++ {
-	// 	for j:=0; j<=maxColumn; j++ {
-	// 		if paper[i][j] == "" {
-	// 			paper[i][j] = "."
-	// 		}
-	// 	}
-	// }
-
-	// for i:=0; i<=maxRow; i++ {
-	// 	fmt.Println(strings.Join(paper[i], ""))
-	// }
-	// fmt.Println(foldingSequence)
+	for i:=0; i<=maxRow; i++ {
+		fmt.Println(strings.Join(paper[i], ""))
+	}
 
 	// // per ogni istruzione di piegatura
 	// for i:=0; i<len(foldingSequence); i++ {
