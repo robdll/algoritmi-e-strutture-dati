@@ -5,7 +5,7 @@ package main
 import "fmt"
 
 func main() {
-	s := []int{5, 2, 4, 6, 1, 3}
+	s := []int{15, 96, 44, 22, 54, 28, 83}
 	fmt.Println("Before: ", s)
 	selectionSort(s)
 	fmt.Println("After: ", s)
