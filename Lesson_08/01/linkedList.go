@@ -53,11 +53,19 @@ func main() {
 
 		switch command {
 			case "+":
-				addNode(&list, value)
+				if searchList(&list, value) {
+					fmt.Println("Valore già presente")
+				} else {
+					addNode(&list, value)
+				}
 			case "-":
 				removeNode(&list, value)
 			case "?":
-				searchList(&list, value)
+				if searchList(&list, value) {
+					fmt.Println("Il valore ", value, " è presente nella lista")
+				} else {
+					fmt.Println("Il valore ", value, " non è presente nella lista")
+				}
 			case "c":
 				countElements(&list)
 			case "p":
@@ -80,6 +88,7 @@ func newNode (value int) *listNode {
 	return &listNode{value: value}
 }
 
+// complessità O(1)
 func addNode (list *linkedList, value int) {
 	node := newNode(value)
 	node.next = list.head
@@ -87,6 +96,7 @@ func addNode (list *linkedList, value int) {
 	fmt.Println("Valore inserito")
 }
 
+// complessità O(n)
 func printList (list *linkedList, ascend bool) {
 	var elements []int
 	for node := list.head; node != nil; node = node.next {
@@ -103,19 +113,18 @@ func printList (list *linkedList, ascend bool) {
 	}
 }
 
-func searchList (list *linkedList, value int) {
+// complessità O(n)
+func searchList (list *linkedList, value int) bool {
 	found := false
 	for node := list.head; node != nil; node = node.next {
 		if node.value == value {
-			fmt.Println("Il valore ", value, " è presente nella lista")
 			found = true
 		}
 	}
-	if !found {
-		fmt.Println("Il valore ", value, " non è presente nella lista")
-	}
+	return found
 }
 
+// complessità O(n)
 func removeNode (list *linkedList, value int) {
 	if list.head == nil {
 		fmt.Println("Nessun elemento nella lista")
@@ -135,6 +144,7 @@ func removeNode (list *linkedList, value int) {
 	}
 }
 
+// complessità O(n)
 func countElements (list *linkedList) {
 	count := 0
 	for node := list.head; node != nil; node = node.next {
