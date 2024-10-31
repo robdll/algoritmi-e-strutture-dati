@@ -13,15 +13,15 @@ func main() {
 
 func selectionSort(slice []int) {
 	// iterate n-1 times
-	for idx := 0; idx < len(slice)-1; idx++ {
-		minIdx := idx
+	for idx := len(slice)-1; idx > 0; idx-- {
+		maxIdx := idx
 		// find the minimum element in the remaining unsorted slice
-		for j := idx + 1; j < len(slice); j++ {
-			if slice[j] < slice[minIdx] {
-				minIdx = j
+		for j := idx - 1; j >= 0; j-- {
+			if slice[j] > slice[maxIdx] {
+				maxIdx = j
 			}
 		}
 		// move minimum element to the index of the unsorted slice
-		slice[idx], slice[minIdx] = slice[minIdx], slice[idx]
+		slice[idx], slice[maxIdx] = slice[maxIdx], slice[idx]
 	}
 }
