@@ -23,8 +23,13 @@ func main () {
 	}
 	fmt.Println("Slice: ", slice)
 	var tree = arr2tree(slice, 0)
-	fmt.Println("Tree: ")
+	fmt.Print("Tree: ")
 	printTree(tree, 0)
+	fmt.Print("Simmetric print: ")
+	printTreeSimmetric(tree)
+	fmt.Println()
+	fmt.Print("Postponed print: ")
+	printTreePostponed(tree)
 }
 
 func arr2tree (a []int, i int) ( root * bitreeNode ) {
@@ -50,5 +55,23 @@ func printTree (root * bitreeNode, spaces int) {
 	} else {
 		fmt.Print("*")
 		fmt.Println()
+	}
+}
+
+
+func printTreeSimmetric (root * bitreeNode) {
+	if root != nil {
+		printTreeSimmetric(root.left)
+		fmt.Print(root.val, " ")
+		printTreeSimmetric(root.right)
+	}
+}
+
+
+func printTreePostponed (root * bitreeNode) {
+	if root != nil {
+		printTreePostponed(root.left)
+		printTreePostponed(root.right)
+		fmt.Print(root.val, " ")
 	}
 }
