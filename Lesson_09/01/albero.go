@@ -23,7 +23,7 @@ func main () {
 	}
 	fmt.Println("Slice: ", slice)
 	var tree = arr2tree(slice, 0)
-	fmt.Print("Tree: ")
+	fmt.Println("Tree: ")
 	printTree(tree, 0)
 	fmt.Print("Simmetric print: ")
 	printTreeSimmetric(tree)
