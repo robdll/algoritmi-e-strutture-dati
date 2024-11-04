@@ -45,15 +45,14 @@ func printTree (root * bitreeNode, spaces int) {
 	for i := 0; i < spaces; i++ {
 		fmt.Print("  ")
 	}
+	fmt.Print("*")
 	if root != nil {
-		fmt.Print("*")
 		fmt.Println(root.val)
 		if(root.left != nil || root.right != nil) {
 			printTree(root.left, spaces+1)
 			printTree(root.right, spaces+1)
 		}
 	} else {
-		fmt.Print("*")
 		fmt.Println()
 	}
 }
