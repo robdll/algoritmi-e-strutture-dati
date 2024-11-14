@@ -42,8 +42,10 @@ func valuta (seq string) {
 			s.Push(num)
 			fmt.Println("Token added:", num)
 		} else {
-			value2, _ := s.Pop()
-			value1, _ := s.Pop()
+			val2, _ := s.Pop()
+			val1, _ := s.Pop()
+			value2 := val2.(int)
+			value1 := val1.(int)
 			switch token {
 			case "+":
 				fmt.Println("Adding:", value1, value2)
