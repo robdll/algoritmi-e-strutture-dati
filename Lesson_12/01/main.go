@@ -1,8 +1,8 @@
 package main
 
 import (
-	"01/stack"
 	"fmt"
+	"stack_project/stack"
 )
 
 func main() {
