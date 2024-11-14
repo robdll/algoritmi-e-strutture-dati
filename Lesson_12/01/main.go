@@ -9,14 +9,32 @@ import (
 )
 
 func main() {
-	s := stack.NewStack()
 	sequence := "2 5 3 - *"
-	CalcExpression(s, strings.Split(sequence, " "))
+	showExpression(sequence)	
+	valuta(sequence)
 }
 
 
-func CalcExpression (s *stack.Stack, seq []string) {
-	for _, token := range  seq {
+func showExpression(seq string) {
+	s := stack.NewStack()
+	for _, token := range  strings.Split(seq, " ") {
+		digit := rune(token[0])
+		if unicode.IsDigit(digit) {
+			num, _ := strconv.Atoi(token)
+			s.Push(num)
+		} else {
+			value2, _ := s.Pop()
+			value1, _ := s.Pop()
+			s.Push(value1)
+			s.Push(value2)
+		}
+	}
+	fmt.Println("Postfixed Expression:", s)
+}
+
+func valuta (seq string) {
+	s := stack.NewStack()
+	for _, token := range  strings.Split(seq, " ") {
 		fmt.Println("Token:", token)
 		digit := rune(token[0])
 		if unicode.IsDigit(digit) {
