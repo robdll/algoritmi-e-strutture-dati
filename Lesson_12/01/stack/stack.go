@@ -40,3 +40,8 @@ func (s *Stack) Peek() (int, error) {
 func (s *Stack) IsEmpty() bool {
 	return len(s.elements) == 0
 }
+
+func (s *Stack) Len() int {
+	return len(s.elements)
+}
+
