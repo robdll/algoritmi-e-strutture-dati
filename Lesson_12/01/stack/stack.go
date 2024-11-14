@@ -4,22 +4,22 @@ import "fmt"
 
 // Stack defines a stack structure.
 type Stack struct {
-	elements []int
+	elements []interface{}
 }
 
 // NewStack creates and returns a new Stack.
 func NewStack() *Stack {
-	return &Stack{elements: []int{}}
+	return &Stack{elements: []interface{}{}}
 }
 
 // Push adds an element to the stack.
-func (s *Stack) Push(value int) {
+func (s *Stack) Push(value interface{}) {
 	s.elements = append(s.elements, value)
 }
 
 // Pop removes and returns the last element from the stack.
 // Returns an error if the stack is empty.
-func (s *Stack) Pop() (int, error) {
+func (s *Stack) Pop() (interface{}, error) {
 	if len(s.elements) == 0 {
 		return 0, fmt.Errorf("stack is empty")
 	}
@@ -29,7 +29,7 @@ func (s *Stack) Pop() (int, error) {
 }
 
 // Peek returns the top element of the stack without removing it.
-func (s *Stack) Peek() (int, error) {
+func (s *Stack) Peek() (interface{}, error) {
 	if len(s.elements) == 0 {
 		return 0, fmt.Errorf("stack is empty")
 	}
