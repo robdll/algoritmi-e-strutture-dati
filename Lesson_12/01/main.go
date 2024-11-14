@@ -10,29 +10,40 @@ import (
 
 func main() {
 	sequence := "2 5 3 - *"
-	showExpression(sequence)	
+	sequenceInfix := "2 * ( 5 - 3 )"
+	convertedToPostfix := converti(sequenceInfix)	
+	fmt.Println("sequenceInfix in Postfixed:", convertedToPostfix)
 	valuta(sequence)
 }
 
 
-func showExpression(seq string) {
+func converti(seq string) string {
 	s := stack.NewStack()
+	result := ""
 	for _, token := range  strings.Split(seq, " ") {
 		digit := rune(token[0])
 		if unicode.IsDigit(digit) {
-			num, _ := strconv.Atoi(token)
-			s.Push(num)
+			result += token + " "
 		} else {
-			value2, _ := s.Pop()
-			value1, _ := s.Pop()
-			s.Push(value1)
-			s.Push(value2)
+			switch token {
+			case "(":
+				break
+			case ")":
+				operand, _ := s.Pop()
+				result += operand.(string) + " "
+			default:  
+				s.Push(token)
+			}
 		}
 	}
-	fmt.Println("Postfixed Expression:", s)
+	for s.Len() > 0 {
+		operand, _ := s.Pop()
+		result += operand.(string) + " "
+	}
+	return result
 }
 
-func valuta (seq string) {
+func valuta (seq string) int{
 	s := stack.NewStack()
 	for _, token := range  strings.Split(seq, " ") {
 		fmt.Println("Token:", token)
@@ -66,9 +77,12 @@ func valuta (seq string) {
 	}
 
 	if s.Len() == 1 {
-		result, _ := s.Pop()
+		res, _ := s.Pop()
+		result := res.(int)
 		fmt.Println("Postfixed Expression result:", result)
+		return result
 	} else {
-		fmt.Println("Error in expression")
+		fmt.Println("Error: insufficient values in the expression")
+		panic("Error: insufficient values in the expression")
 	}
 }
