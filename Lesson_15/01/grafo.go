@@ -42,12 +42,12 @@ func initGrafo (g *grafo, n int) {
 		for _, edge := range edgeList {
 			num, err := strconv.Atoi(edge)
 			// if string is not a comma separated list of integers, or if the integer is pointing to a not-existing node, retry the current node
-			if err != nil || num<0 || num>=n {
+			if err != nil || num<(-1) || num>=n {
 				fmt.Println("Invalid input. Please enter a comma separated list of integers.")
 				// decrement i to retry the current node
 				i--
 				break
-			} else {
+			} else if(num != -1) {
 				LinkedListPackage.AddNode(&g.adiacenti[i], num)
 			}
 		}
