@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	LinkedList "linkedList_project/linkedList"
+	LinkedListPackage "linkedList_project/linkedList"
 	"strconv"
 	"strings"
 ) 
 
 type grafo struct {
 	n int 
-	adiacenti []LinkedList.LinkedList
+	adiacenti []LinkedListPackage.LinkedList
 }
 
 func main() {
@@ -22,11 +22,11 @@ func main() {
 
 
 func nuovoGrafo (n int) *grafo {
-	s := LinkedList.NewLinkedList()
+	s := LinkedListPackage.NewLinkedList()
 	for i := 0; i < n; i++ {
-		LinkedList.AddNode(s, i)
+		LinkedListPackage.AddNode(s, i)
 	}
-	return &grafo{n, make([]LinkedList.LinkedList, n)}
+	return &grafo{n, make([]LinkedListPackage.LinkedList, n)}
 }
 
 func initGrafo (g *grafo, n int) {
@@ -35,13 +35,20 @@ func initGrafo (g *grafo, n int) {
 		fmt.Print("Enter the edges of node ", i, " separated by comma: ")
 		var edges string
 		fmt.Scan(&edges)
+		// split the string by comma  (e.g. "1,2,3" -> ["1", "2", "3"])
 		edgeList := strings.Split(edges, ",")
 		for _, edge := range edgeList {
-			if _, err := strconv.Atoi(edge); err != nil {
+			num, err := strconv.Atoi(edge)
+			// if string is not a comma separated list of integers, or if the integer is pointing to a not-existing node, retry the current node
+			if err != nil || num<0 || num>=n {
 				fmt.Println("Invalid input. Please enter a comma separated list of integers.")
-				i-- // decrement i to retry the current node
+				// decrement i to retry the current node
+				i--
 				break
+			} else {
+				LinkedListPackage.AddNode(&g.adiacenti[i], num)
 			}
 		}
 	}
 }
+
