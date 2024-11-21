@@ -2,26 +2,28 @@ package linkedlist
 
 import "fmt"
 
+//modificato con interface{}, controlla printlist
+
 type ListNode struct {
-	value int
-	next *ListNode
+	value interface{} //devo modificarlo da int a interface{} per essere un tipo qualunque
+	next  *ListNode
 }
 
 type LinkedList struct {
 	head *ListNode
 }
 
-//  creates and returns a new LinkedList.
+// creates and returns a new LinkedList.
 func NewLinkedList() *LinkedList {
 	return &LinkedList{head: nil}
 }
 
-func newNode (value int) *ListNode {
+func newNode(value interface{}) *ListNode {
 	return &ListNode{value: value}
 }
 
 // complessità O(1)
-func AddNode (list *LinkedList, value int) {
+func AddNode(list *LinkedList, value interface{}) {
 	node := newNode(value)
 	node.next = list.head
 	list.head = node
@@ -29,10 +31,16 @@ func AddNode (list *LinkedList, value int) {
 }
 
 // complessità O(n)
-func printList (list *LinkedList, ascend bool) {
+func printList(list *LinkedList, ascend bool) {
 	var elements []int
 	for node := list.head; node != nil; node = node.next {
-		elements = append(elements, node.value)
+
+		if value, ok := node.value.(int); ok {
+			elements = append(elements, value)
+		} else {
+
+			fmt.Println("Errore: tipo non valido per node.value")
+		}
 	}
 	if ascend {
 		for i := len(elements) - 1; i >= 0; i-- {
@@ -46,7 +54,7 @@ func printList (list *LinkedList, ascend bool) {
 }
 
 // complessità O(n)
-func SearchList (list *LinkedList, value int) bool {
+func SearchList(list *LinkedList, value interface{}) bool {
 	found := false
 	for node := list.head; node != nil; node = node.next {
 		if node.value == value {
@@ -57,7 +65,7 @@ func SearchList (list *LinkedList, value int) bool {
 }
 
 // complessità O(n)
-func removeNode (list *LinkedList, value int) {
+func removeNode(list *LinkedList, value int) {
 	if list.head == nil {
 		fmt.Println("Nessun elemento nella lista")
 		return
@@ -77,7 +85,7 @@ func removeNode (list *LinkedList, value int) {
 }
 
 // complessità O(n)
-func countElements (list *LinkedList) {
+func countElements(list *LinkedList) {
 	count := 0
 	for node := list.head; node != nil; node = node.next {
 		count++
