@@ -18,6 +18,8 @@ func main() {
 	fmt.Scan(&n)
 	g := nuovoGrafo(n)
 	initGrafo(g, n)
+	fmt.Println("The graph is:")
+	printGrafo(g)
 }
 
 
@@ -52,3 +54,21 @@ func initGrafo (g *grafo, n int) {
 	}
 }
 
+func printGrafo (g *grafo) {
+	for i := 0; i < g.n; i++ {
+		fmt.Print("  ", i)
+	}
+	for i := 0; i < g.n; i++ {
+		fmt.Println()
+		fmt.Print(i, " ")
+		currentList := g.adiacenti[i]
+		for j := 0; j < g.n; j++ {
+			hasEdge := LinkedListPackage.SearchList(&currentList, j)
+			if hasEdge {
+				fmt.Print("1  ")
+			} else {
+				fmt.Print("0  ")
+			}
+		}
+	}
+}

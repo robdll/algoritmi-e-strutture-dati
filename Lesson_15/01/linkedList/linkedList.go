@@ -46,7 +46,7 @@ func printList (list *LinkedList, ascend bool) {
 }
 
 // complessità O(n)
-func searchList (list *LinkedList, value int) bool {
+func SearchList (list *LinkedList, value int) bool {
 	found := false
 	for node := list.head; node != nil; node = node.next {
 		if node.value == value {
