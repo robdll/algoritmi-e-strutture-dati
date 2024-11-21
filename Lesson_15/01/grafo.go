@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	LinkedListPackage "linkedList_project/linkedList"
 	"strconv"
 	"strings"
+
+	LinkedListPackage "../linkedList"
 ) 
 
 type grafo struct {
