@@ -25,7 +25,6 @@ func AddNode(list *LinkedList, value interface{}) {
 	node := newNode(value)
 	node.next = list.head
 	list.head = node
-	fmt.Println("Valore inserito")
 }
 
 // complessità O(n)
