@@ -3,7 +3,7 @@ package linkedlist
 import "fmt"
 
 type ListNode struct {
-	value interface{} //devo modificarlo da int a interface{} per essere un tipo qualunque
+	value interface{} // use interface{} to be generic type
 	next  *ListNode
 }
 
