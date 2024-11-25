@@ -2,8 +2,6 @@ package linkedlist
 
 import "fmt"
 
-//modificato con interface{}, controlla printlist
-
 type ListNode struct {
 	value interface{} //devo modificarlo da int a interface{} per essere un tipo qualunque
 	next  *ListNode
