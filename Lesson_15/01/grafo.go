@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	LinkedListPackage "../linkedList"
+	LinkedListPackage "Grafi/linkedList"
 ) 
 
 type grafo struct {
