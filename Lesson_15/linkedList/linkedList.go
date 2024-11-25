@@ -4,7 +4,7 @@ import "fmt"
 
 type ListNode struct {
 	value interface{} // use interface{} to be generic type
-	next  *ListNode
+	next *ListNode
 }
 
 type LinkedList struct {
