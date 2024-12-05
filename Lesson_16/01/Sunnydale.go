@@ -72,7 +72,6 @@ func main(){
 				darkestGallery = gallery
 			}
 		}
-		Println("going to: ", darkestGallery.to)
 		currentJunction = junctionMap[darkestGallery.to]
 	}
 
