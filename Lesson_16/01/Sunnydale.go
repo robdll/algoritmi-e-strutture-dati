@@ -20,26 +20,6 @@ type Gallery struct {
 	brightness int
 }
 
-// func AddEdge(graph []*linkedList, from int, to int , peso int){
-// 	newNode := &listNode{destinazione: to, peso: peso, next: graph[from].iniziolista}
-// 	graph[from].iniziolista = newNode
-// }
-
-
-// func PrintGraph( graph []*linkedList){
-// 	for i,lista:=range graph{
-// 		if lista.iniziolista != nil {
-// 			Print(" nodo", i , ":")
-// 			current := lista.iniziolista
-// 			for current != nil{
-// 				Print(" -> ",current.destinazione, "( peso: ", current.peso, ")" )
-// 				current = current.next
-// 			}
-// 			Println()
-// 		}
-// 	}
-// }
-
 func main(){
 
 	file, err := os.Open("VampireDates.txt")
@@ -59,7 +39,6 @@ func main(){
 		startPath = start
 		endPath = end
 	}
-
 
 	junctionMap := make(map[int]Junction)
 		
@@ -96,7 +75,6 @@ func main(){
 		Println("going to: ", darkestGallery.to)
 		currentJunction = junctionMap[darkestGallery.to]
 	}
-
 
 	if currentJunction.id == endJunction.id {
 		Println("arrived in ", steps, "steps")
