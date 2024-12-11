@@ -38,53 +38,64 @@ func main(){
 
 	// Println("numero random 1: ", throwDice())
 	Println("board", board)
+	Println("inserisci la casella di partenza: ")
+	for{
+		Scan(&i)
+		if board[i] != 0{
+			Println("posizione non valida, inserisci un'altra casella: ")
+		}else{
+			break
+		}
 
+	}
 	//playGame(i, board)
-	mosseMinime := MosseMinimeSenzaUsoScaleSerpenti(board, i)
+	mosseMinime := MosseMinimeSenzaUsoScaleSerpenti(board, i+1)
 	Println(mosseMinime)
 
+
+	// casella di paretenza i + 1 da fare dopo
 }
 
-func MosseMinimeSenzaUsoScaleSerpenti(board [30]int, casellacorrente int) int{
+func MosseMinimeSenzaUsoScaleSerpenti(board [30]int, startbox int) int{
 		
-	lancioMax:= 6
+	maxThrow:= 6
 	var verify int = 0	//si parte dalla prima casella data i
-	var lanci int
+	var throwTOT int
 	//var dadi []int 	se vogliamo dire la serie dei dadi lanciati...
 	//provo simulando il lancio con numero piu alto, se ciò porta ad una scala o serprente
 	//o superi la casella 30 il lancio sara rifatto dalla casella diminuito di uno il dado
 	for {
 		
-		if casellacorrente < 29{
+		if startbox < 29{
 			
-			verify = board[casellacorrente]
+			verify = board[startbox]
 			Print("Prendo ",verify)
 			if verify != 0 {
 				
-				casellacorrente -= lancioMax
-				lancioMax -= 1
-				casellacorrente += lancioMax
+				startbox -= maxThrow
+				maxThrow -= 1
+				startbox += maxThrow
 				
-				Println("if",casellacorrente)
+				Println("if",startbox)
 			}else{
-				lancioMax = 6
-				casellacorrente += lancioMax
-				lanci ++
-				Println(" lancio 6 procedi casella: ",casellacorrente)
+				maxThrow = 6
+				startbox += maxThrow
+				throwTOT ++
+				Println(" lancio 6 procedi casella: ",startbox)
 			}
-		}else if casellacorrente > 29{
+		}else if startbox > 29{
 			
-			casellacorrente-=lancioMax
-			lancioperf := 29 - casellacorrente
+			startbox -=maxThrow
+			lancioperf := 29 - startbox
 			Print("sei andato in over, dovevi fare: ", lancioperf)
 			break
-		}else if casellacorrente == 29 {
+		}else if startbox == 29 {
 			Print("hai vinto con: ")
 			break
 		}
 	}
 	//Println(dadi)
-	return lanci
+	return throwTOT
 }
 
 
