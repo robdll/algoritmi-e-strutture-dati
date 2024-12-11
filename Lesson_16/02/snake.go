@@ -22,7 +22,7 @@ func main(){
 	}
 	defer file.Close()
 	var board [30]int
-	//var i int = 0
+	var i int = 0 //casella i + 1
 	for i := 1; i<30; i++ {
 		board[i] = 0
 	}
@@ -40,16 +40,17 @@ func main(){
 	Println("board", board)
 
 	//playGame(i, board)
-	mosseMinime := MosseMinimeSenzaUsoScaleSerpenti(board)
+	mosseMinime := MosseMinimeSenzaUsoScaleSerpenti(board, i)
 	Println(mosseMinime)
 
 }
 
-func MosseMinimeSenzaUsoScaleSerpenti(board [30]int) int{
+func MosseMinimeSenzaUsoScaleSerpenti(board [30]int, casellacorrente int) int{
 		
 	lancioMax:= 6
-	var casellacorrente,verify int	//si parte dalla prima casella
+	var verify int = 0	//si parte dalla prima casella data i
 	var lanci int
+	//var dadi []int 	se vogliamo dire la serie dei dadi lanciati...
 	//provo simulando il lancio con numero piu alto, se ciò porta ad una scala o serprente
 	//o superi la casella 30 il lancio sara rifatto dalla casella diminuito di uno il dado
 	for {
@@ -63,7 +64,7 @@ func MosseMinimeSenzaUsoScaleSerpenti(board [30]int) int{
 				casellacorrente -= lancioMax
 				lancioMax -= 1
 				casellacorrente += lancioMax
-				lanci --
+				
 				Println("if",casellacorrente)
 			}else{
 				lancioMax = 6
@@ -72,14 +73,17 @@ func MosseMinimeSenzaUsoScaleSerpenti(board [30]int) int{
 				Println(" lancio 6 procedi casella: ",casellacorrente)
 			}
 		}else if casellacorrente > 29{
-			Print("sei andato in over")
+			
+			casellacorrente-=lancioMax
+			lancioperf := 29 - casellacorrente
+			Print("sei andato in over, dovevi fare: ", lancioperf)
 			break
 		}else if casellacorrente == 29 {
 			Print("hai vinto con: ")
 			break
 		}
 	}
-
+	//Println(dadi)
 	return lanci
 }
 
