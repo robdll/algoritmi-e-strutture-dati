@@ -3,15 +3,10 @@ package main
 import (
 	"bufio"
 	. "fmt"
-	"math/rand"
 	"os"
 	"strconv"
 	"strings"
 )
-
-func throwDice() int {
-	return rand.Intn(6)+1
-}
 
 func main(){
 
@@ -41,87 +36,33 @@ func main(){
 	// get Starting point
 	var startingSquare int = getStartingSquare(board)
 
-	minThrows := calcMinDiceThrowToWin(board, startingSquare, false)
-	Println(minThrows)
+	minRolls := calcMinDiceRollToWin(board, startingSquare)
+	Println("Numero minimo di lanci per vincere: ", minRolls)
 }
 
-func calcMinDiceThrowToWin(board []int, startingSquare int, allowSnakeAndStair bool) int{
-		
-	currentSquare := startingSquare
-	totThrow := 0
+func calcMinDiceRollToWin(board []int, startingSquare int) int {
+	rolls := 0
 
-	for {
-		if currentSquare == 29{
-			break
-		}
-		totThrow++
+	// creo un array di len(board) elementi
 
-		currentSquare = currentSquare + 6
-		if currentSquare >= 29 {
-			break
-		}
-		for board[currentSquare] != 0 {
-			currentSquare = currentSquare - 1
-		}
-	}
-	return totThrow
-}
+	// creo una coda con la square di partenza
 
-// 	var verify int = 0	//si parte dalla prima casella data i
-// 	var throwTOT int
-// 	//var dadi []int 	se vogliamo dire la serie dei dadi lanciati...
-// 	//provo simulando il lancio con numero piu alto, se ciò porta ad una scala o serprente
-// 	//o superi la casella 30 il lancio sara rifatto dalla casella diminuito di uno il dado
-	
-// 			verify = board[startingSquare]
-// 			Print("Prendo ",verify)
-// 			if verify != 0 {
-				
-// 				startingSquare -= maxThrow
-// 				maxThrow -= 1
-// 				startingSquare += maxThrow
-				
-// 				Println("if",startingSquare)
-// 			}else{
-// 				maxThrow = 6
-// 				startingSquare += maxThrow
-// 				throwTOT ++
-// 				Println(" lancio 6 procedi casella: ",startingSquare)
-// 			}
-// 		}else if startingSquare > 29{
-			
-// 			startingSquare -=maxThrow
-// 			lancioperf := 29 - startingSquare
-// 			Print("sei andato in over, dovevi fare: ", lancioperf)
-// 			break
-// 		} else if startingSquare == 29 {
-// 			Print("hai vinto con: ")
-// 			break
-// 		}
-// 	}
-// 	//Println(dadi)
-// 	return throwTOT
-// }
+	// finchè la coda non è vuota o ho trovato la square 30
 
+		// prendo il primo elemento della coda
 
-func playGame(i int, board [30]int) {
-	for {
-		Print("lancio da casella ",i, " ")
-		numDice:= throwDice()
-		i+= numDice
-		if i == 30{
-			Println("Hai vinto! con il lancio: ", numDice)
-			break
-		}else if i > 30 {
-			Println("sei andato oltre le 30 caselle con il lancio: ", numDice)	
-			break
-		}
-		val:=board[i]
-		if val != 0{
-			i = val
-		}
-		Println("a casella", i, "con il lancio dado numero: ", numDice)
-	}
+		// se il valore della square è 30, ho vinto e ritorno il numero di lanci
+
+		// se la square è già stata visitata, continuo con il prossimo elemento (break)
+
+		// segno la square come visitata
+
+		// metto in coda tutti i vicini di quella square (square+1..6) (se square)
+
+		// incremento il numero di lanci
+
+		return rolls
+
 }
 
 func getStartingSquare (board []int) int {
